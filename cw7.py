@@ -65,5 +65,5 @@ def too_bright(fname):
 
 
 if __name__ == '__main__':
-    #too_dark('dark_forest.jpg')
+    too_dark('dark_forest.jpg')
     too_bright('Bociany.jpg')

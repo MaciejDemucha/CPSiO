@@ -4,47 +4,6 @@ import numpy as np
 from PIL import Image
 
 
-def point_transformation(file_path, file_path_gray, new_level):
-    # Load the image
-    image = Image.open(file_path)
-    # Convert the image to grayscale
-    grayscale_image = image.convert('L')
-    # Change the level of grayscale
-    grayscale_image = grayscale_image.point(lambda x: x * (new_level / 255))
-    # Save the new image
-    grayscale_image.save(file_path_gray)
-
-
-def contrast_transformation(file_path, file_path_contrast, factor):
-    # Load the image
-    image = Image.open(file_path)
-    # grayscale_image = image.convert('L')
-    # Apply the contrast function to each pixel
-    contrast_image = image.point(lambda c: contrast(c, factor))
-    # Save the new image
-    contrast_image.save(file_path_contrast)
-
-
-# Create a contrast function
-def contrast(c, factor):
-    return 128 + factor * (c - 128)
-    # return 1 / (1 + (m / c) ** e)
-
-
-def gamma_transformation(file_path, file_path_gamma, gamma):
-    # Load the image
-    image = Image.open(file_path)
-    # Convert the image to a numpy array
-    image_array = np.array(image)
-    # Normalize the pixel values between 0 and 1
-    image_array_normalized = image_array / 255.0
-    image_array_corrected = np.power(image_array_normalized, gamma)
-    # Convert the numpy array back to an image
-    new_image = Image.fromarray(np.uint8(image_array_corrected * 255))
-    # Save the new image
-    new_image.save(file_path_gamma)
-
-
 def constant_transform(img_gray):
     plt.figure(figsize=(15, 10))
 
@@ -67,7 +26,7 @@ def constant_transform(img_gray):
     plt.imshow(cv2.multiply(img_gray, 10), cmap='gray', vmin=0,
                vmax=255)  # mnożenie tablicy/macieży przez skalar (c = 10)
 
-    plt.savefig("obraz_stala.jpg")
+    plt.show()
 
 
 def contrast_transform(img_gray):
@@ -97,7 +56,7 @@ def contrast_transform(img_gray):
     # że liczby w img_contrast będą z zakresu 0-255
     plt.imshow(img_contrast, cmap='gray', vmin=0, vmax=255)
 
-    plt.savefig("obraz_contrast.jpg")
+    plt.show()
 
 
 def gamma_transform(img_gray):
@@ -127,7 +86,7 @@ def gamma_transform(img_gray):
     # że liczby w img_gamma będą z zakresu 0-255
     plt.imshow(img_gamma, cmap='gray', vmin=0, vmax=255)
 
-    plt.savefig("obraz_gamma.jpg")
+    plt.show()
 
 
 if __name__ == '__main__':
